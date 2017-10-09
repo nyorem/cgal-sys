@@ -4,13 +4,17 @@ Some Rust bindings for the CGAL library.
 
 ## Features
 
-- 2D convex hull
+- 2d convex hull
+- 2d Delaunay
+
+## Requirements
+
+The CGAL library must be installed and the `CGAL_DIR` environment variable must be set to the root of you CGAL installation directory.
 
 ## TODO
 
 - documentaion
 - doctests
 - travis
-- Delaunay
 - Voronoi
 - some examples
