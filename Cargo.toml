@@ -1,0 +1,17 @@
+[package]
+name = "cgal-sys"
+version = "0.1.0"
+authors = ["Jocelyn MEYRON <Jocelyn.Meyron@grenoble-inp.org>"]
+build = "build.rs"
+
+description = "Rust FFI bindings for the CGAL library"
+repository = "https://github.com/nyorem/cgal-sys"
+
+license = "MIT"
+readme = "README.md"
+
+[dependencies]
+libc = "0.2.32"
+
+[build-dependencies]
+cc = "1.0.0"
