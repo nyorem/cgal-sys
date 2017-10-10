@@ -17,4 +17,6 @@ The CGAL library must be installed and the `CGAL_DIR` environment variable must 
 - doctests
 - travis
 - Voronoi
-- some examples
+- some examples:
+    - geometric inference
+    - 2d viewer (glium...)

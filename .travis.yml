@@ -1,0 +1,23 @@
+language: rust
+sudo: false
+
+rust:
+  - stable
+  - beta
+  - nightly
+
+matrix:
+  allow_failures:
+    - rust: nightly
+
+before_script:
+  - rustc -V
+  - cargo -V
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libcgal-dev gcc
+
+script:
+  - cargo build --verbose
+  - cargo test --verbose
