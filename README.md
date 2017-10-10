@@ -1,4 +1,4 @@
-# cgal-sys
+# cgal-sys [![Build Status](https://travis-ci.org/nyorem/cgal-sys.svg?branch=master)](https://travis-ci.org/nyorem/cgal-sys)
 
 Some Rust bindings for the CGAL library.
 
