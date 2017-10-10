@@ -12,6 +12,7 @@ fn main() {
             cc::Build::new()
                 .file("src/cgal_wrapper.cpp")
                 .cpp(true)
+                .flag("-frounding-math")
                 .include(cgal_include_dir)
                 .compile("libcgal.a");
 
@@ -21,6 +22,7 @@ fn main() {
             cc::Build::new()
                 .file("src/cgal_wrapper.cpp")
                 .cpp(true)
+                .flag("-frounding-math")
                 .compile("libcgal.a");
 
             println!("cargo:rustc-flags=-l CGAL_Core -l CGAL -l gmp");
