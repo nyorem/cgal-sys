@@ -43,7 +43,7 @@ extern "C" int* c_convex_hull_2 (vec2 *points, int n_points, int* size_hull) {
 
 // 2d Delaunay
 extern "C" int* c_delaunay_2 (vec2 *points, int n_points, int* size_tri) {
-    std::vector<std::pair<Point_2, int>> points_vec;
+    std::vector<std::pair<Point_2, int> > points_vec;
     for (int i = 0; i < n_points; ++i) {
         std::pair<Point_2, int> p_info;
         p_info.first = Point_2(points[i].x, points[i].y);
