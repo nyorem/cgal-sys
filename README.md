@@ -9,7 +9,7 @@ Some Rust bindings for the CGAL library.
 
 ## Requirements
 
-The CGAL library must be installed and the `CGAL_DIR` environment variable must be set to the root of you CGAL installation directory.
+- CGAL
 
 ## TODO
 
