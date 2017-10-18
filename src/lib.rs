@@ -19,7 +19,7 @@ impl Vec2 {
 /// A triangle represented by 3 indices.
 #[repr(C)]
 #[derive(Debug, PartialEq)]
-pub struct Triangle(i32, i32, i32);
+pub struct Triangle(pub i32, pub i32, pub i32);
 
 extern {
     fn c_convex_hull_2(arr: *const Vec2,
