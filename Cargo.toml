@@ -11,13 +11,10 @@ license = "MIT"
 readme = "README.md"
 
 [dependencies]
-libc = "0.2.32"
+libc = "0.2.62"
 
 [build-dependencies]
-cc = "1.0.0"
+cc = "1.0.40"
 
-[dev_dependencies]
-glium = "*"
-
-[[example]]
-name = "viewer"
+[dev-dependencies]
+glium = "0.25.1"

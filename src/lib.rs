@@ -39,8 +39,9 @@ pub fn convex_hull_2 (arr: &[Vec2]) -> Vec<i32> {
     unsafe {
         let chull_ptr = c_convex_hull_2(arr.as_ptr(), arr.len(), size_chull_ptr);
         let chull_slice =  std::slice::from_raw_parts(chull_ptr, size_chull) ;
+        let vec = chull_slice.to_vec();
         libc::free(chull_ptr as *mut c_void);
-        chull_slice.to_vec()
+        vec
     }
 }
 
@@ -52,7 +53,6 @@ pub fn delaunay_2 (arr: &[Vec2]) -> Vec<Triangle> {
     unsafe {
         let tri_ptr = c_delaunay_2(arr.as_ptr(), arr.len(), size_tri_ptr);
         let tri_slice =  std::slice::from_raw_parts(tri_ptr, 3 * size_tri) ;
-        libc::free(tri_ptr as *mut c_void);
         let triangles = tri_slice.to_vec();
 
         let mut dt: Vec<Triangle> = Vec::new();
@@ -60,6 +60,8 @@ pub fn delaunay_2 (arr: &[Vec2]) -> Vec<Triangle> {
             assert_eq!(t.len(), 3);
             dt.push(Triangle(t[0], t[1], t[2]));
         }
+
+        libc::free(tri_ptr as *mut c_void);
         dt
     }
 }

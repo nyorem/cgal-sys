@@ -7,9 +7,9 @@ use cgal_sys::{convex_hull_2, delaunay_2};
 use glium::glutin::{Event, ElementState, VirtualKeyCode, WindowEvent, MouseButton};
 use glium::Surface;
 
-const WINDOW_WIDTH : u32 = 800;
-const WINDOW_HEIGHT: u32 = 600;
-const N_POINTS_MAX : usize = 100;
+const WINDOW_WIDTH: f64 = 1024.0;
+const WINDOW_HEIGHT: f64 = 768.0;
+const N_POINTS_MAX: usize = 100;
 
 #[derive(Copy, Clone)]
 struct Vertex {
@@ -35,8 +35,8 @@ fn main() {
     // Setup
     let mut events_loop = glium::glutin::EventsLoop::new();
     let window = glium::glutin::WindowBuilder::new()
-        .with_dimensions(WINDOW_WIDTH, WINDOW_HEIGHT)
-        .with_title("Viewer");
+        .with_title("Viewer")
+        .with_dimensions(glium::glutin::dpi::LogicalSize::new(WINDOW_WIDTH, WINDOW_HEIGHT));
     let context = glium::glutin::ContextBuilder::new();
     let display = glium::Display::new(window, context, &events_loop).unwrap();
 
@@ -105,7 +105,7 @@ fn main() {
 
     let mut points_vec2 = Vec::new();
     let mut delaunay_tri: Option<Vec<Triangle>> = None;
-    let mut chull: Option<Vec<i32>> = None; // TODO
+    let mut chull: Option<Vec<i32>> = None; // TODO: draw
 
     let wireframe_params = glium::DrawParameters {
         polygon_mode : glium::draw_parameters::PolygonMode::Line,
@@ -141,7 +141,8 @@ fn main() {
             }
 
             // TODO: do not recreate index buffer each frame
-            let triangles_indices = glium::IndexBuffer::new(&display, glium::index::PrimitiveType::TrianglesList,
+            let triangles_indices = glium::IndexBuffer::new(&display,
+                                                            glium::index::PrimitiveType::TrianglesList,
                                                             &triangles_gl).unwrap();
 
             target.draw(points_buffer.slice(0 .. point_idx).unwrap(),
@@ -154,7 +155,7 @@ fn main() {
         events_loop.poll_events(|ev| {
             match ev {
                 Event::WindowEvent { event, .. } => match event {
-                    WindowEvent::Closed => {
+                    WindowEvent::CloseRequested => {
                         closed = true;
                     },
 
@@ -199,8 +200,9 @@ fn main() {
                         }
                     },
 
-                    WindowEvent::MouseMoved { position: (x,y), .. } => {
-                        cursor_position = Some(to_opengl_frame(x as f32, y as f32));
+                    // Track mouse position
+                    WindowEvent::CursorMoved { position, .. } => {
+                        cursor_position = Some(to_opengl_frame(position.x as f32, position.y as f32));
                     },
 
                     _ => (),
